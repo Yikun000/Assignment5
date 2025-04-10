@@ -1,0 +1,29 @@
+.Hero{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 100;
+    font-style: initial;
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+
+    padding: 100px;
+    border-width: 2px;
+    border-style: hidden;
+    margin: 0px;
+    text-align: top;
+
+}
+
+.HeroT{
+font-size: 75px;
+}
+
+.registerB{
+  text-align: center;
+  font-size: 50px;
+  background-color: #364891;
+  color: aliceblue;
+  font-family: "Tiny5", serif;
+
+}

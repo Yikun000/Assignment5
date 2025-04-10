@@ -1,0 +1,102 @@
+.header {
+    background-color: #364891;
+    display: flex;
+    align-items: center;
+}
+
+.search-bar {
+  display: flex;
+  margin: 15px;
+  align-items: center;
+  justify-content: flex-end;
+  width: max-content;
+  height: 20px;
+  padding: 6px;
+  border-radius: 28px;
+  background: #c8c7c7;
+  transition: 0.25s;
+}
+
+.search-bar:focus-within {
+  background: #fffefe;
+}
+
+.search-bar:hover {
+  background: #f6f6f6;
+}
+
+.search-input {
+  font-size: 14px;
+  font-family: 'sen', sans-serif;
+  color: #333333;
+  margin-right: 6px;
+  outline: none;
+  border: none;
+  background: transparent;
+  flex: 1;
+}
+
+.search-input::placeholder,
+.search-icon {
+  color: rgba(0, 0, 0, .5);
+}
+
+.search-icon {
+  font-size: 18px;
+  color: rgba(0, 0, 0, .5);
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+.search-bar button {
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.In {
+  background-color: aquamarine;
+  font-size: 25px;
+  position: absolute;
+  top: 15px;
+  right: 5px;
+  text-align: center;
+  font-family: "Tiny5", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+
+.Up {
+  background-color: lightcoral;
+  font-family: "Tiny5", serif;
+  font-weight: 400;
+  font-style: normal;
+  position: absolute;
+  top: 15px;
+  right: 90px;
+  font-size: 25px;
+}
+
+.logo-container {
+  flex: 1;
+  cursor: pointer;
+}
+
+.logo {
+  font-family: 'sen', sans-serif;
+  font-size: 30px;
+  color: ffa31a;
+  cursor: pointer;
+}
+
+.logo-image {
+  height: 40px;
+  width: auto;
+  cursor: pointer;
+}

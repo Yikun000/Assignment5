@@ -1,0 +1,28 @@
+.footer{
+    background-color: #364891;
+    color:#24262b;
+    padding: 2rem 0;
+    text-align: center;
+    align-items: center;
+    font-size: 40px;
+  }
+  
+  .footer-info a{
+    gap: 1rem;
+    font-size: 25px;
+    color: aliceblue;
+  }
+  
+  
+  
+  .footer-links a{
+    color: #ccc;
+    display: flex;
+    gap: 2rem;
+    font-size: 50px;
+  }
+  
+  .copyright{
+    color: rgb(92, 90, 90);
+    font-size: 20px;
+  }
