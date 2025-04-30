@@ -1,5 +1,5 @@
-import "./RegisterView.css"
-import { useState } from "react"
+import "./RegisterView.css";
+import { useState } from "react";
 import HeaderSection from "../Components/HeaderSection";
 
 function RegisterView() {
@@ -9,11 +9,13 @@ function RegisterView() {
     const [password, setPassword] = useState("");
     const [rePassword, setRePassword] = useState("");
 
-    function rePasswordCheck() { //checks if the re-Entered password is the same
-        if (rePassword == password) {
-            return true
+    function handleSubmit(event) {
+        event.preventDefault(); // prevent form from refreshing the page
+        if (password === rePassword) {
+            alert("Password Match");
+            // Additional logic like saving user info or navigating can go here
         } else {
-            return false
+            alert("Passwords are not the same");
         }
     }
 
@@ -22,23 +24,57 @@ function RegisterView() {
             <HeaderSection />
             <div className="formContainerReg">
                 <h1 className="formTitleReg">Register</h1>
-                <form className="formReg" onSubmit={() => rePasswordCheck()?alert('Password Match'):alert('Passwords are not the same')} >
-                    <label className="boxLabelsReg" >First Name:</label>
-                    <input required className="infoBoxesReg" type="text" value={firstName} onChange={(event) => { setFirstName(String(event.target.value)) }} />
-                    <label className="boxLabelsReg" >Last Name:</label>
-                    <input required className="infoBoxesReg" type="text" value={lastName} onChange={(event) => { setLastName(String(event.target.value)) }} />
-                    <label className="boxLabelsReg" >Email:</label>
-                    <input required className="infoBoxesReg" type="text" value={email} onChange={(event) => { setEmail(String(event.target.value)) }} />
-                    <label className="boxLabelsReg" >Pasword:</label>
-                    <input required className="infoBoxesReg" type="password" value={password} onChange={(event) => { setPassword(String(event.target.value)) }} />
-                    <label className="boxLabelsReg" >Re-enter Password:</label>
-                    <input required className="infoBoxesReg" type="password" value={rePassword} onChange={(event) => { setRePassword(String(event.target.value)) }} />
+                <form className="formReg" onSubmit={handleSubmit}>
+                    <label className="boxLabelsReg">First Name:</label>
+                    <input
+                        required
+                        className="infoBoxesReg"
+                        type="text"
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                    />
 
-                    <input className="registerButtonReg" type="submit" value={"Register"} />
+                    <label className="boxLabelsReg">Last Name:</label>
+                    <input
+                        required
+                        className="infoBoxesReg"
+                        type="text"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                    />
+
+                    <label className="boxLabelsReg">Email:</label>
+                    <input
+                        required
+                        className="infoBoxesReg"
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+
+                    <label className="boxLabelsReg">Password:</label>
+                    <input
+                        required
+                        className="infoBoxesReg"
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+
+                    <label className="boxLabelsReg">Re-enter Password:</label>
+                    <input
+                        required
+                        className="infoBoxesReg"
+                        type="password"
+                        value={rePassword}
+                        onChange={(e) => setRePassword(e.target.value)}
+                    />
+
+                    <input className="registerButtonReg" type="submit" value="Register" />
                 </form>
             </div>
         </div>
-    )
+    );
 }
 
-export default RegisterView
+export default RegisterView;

@@ -1,7 +1,7 @@
-import "./FeatureSection.css"
-import { useEffect, useState } from "react"
+import "./FeatureSection.css";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios"
+import axios from "axios";
 
 function FeatureSection() {
     const [movies, setMovies] = useState([]);
@@ -9,10 +9,11 @@ function FeatureSection() {
     const [movie2, setMovie2] = useState(1);
     const [movie3, setMovie3] = useState(2);
     const [movie4, setMovie4] = useState(3);
-    const [fetchingMovies, setFetchingMovies] = useState(true); //true means it's still fetching the movies from the api
+    const [fetchingMovies, setFetchingMovies] = useState(true); // true means it's still fetching the movies from the api
     const navigate = useNavigate();
 
-    useEffect(() => { //Selects 3 random different movies
+    useEffect(() => {
+        // Selects 3 random different movies
         (function randMovies() {
             let m1 = Math.floor(Math.random() * 20) + 1;
             let m2, m3, m4;
@@ -33,16 +34,20 @@ function FeatureSection() {
             setMovie2(m2);
             setMovie3(m3);
             setMovie4(m4);
-        })()
+        })();
     }, []);
 
-    useEffect(() => { 
+    useEffect(() => {
         (async function getMovies() {
             try {
-                const responsePages = await axios.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=${import.meta.env.VITE_TMDB_API_KEY}`);
+                const responsePages = await axios.get(
+                    `https://api.themoviedb.org/3/movie/now_playing?api_key=${import.meta.env.VITE_TMDB_API_KEY}`
+                );
                 const page = Math.floor(Math.random() * responsePages.data.total_pages / 4) + 1;
 
-                const responseMovies = await axios.get(`https://api.themoviedb.org/3/movie/now_playing?include_adult=false&with_original_language=en&language=en-US&page=${page}&api_key=${import.meta.env.VITE_TMDB_API_KEY}`);
+                const responseMovies = await axios.get(
+                    `https://api.themoviedb.org/3/movie/now_playing?include_adult=false&with_original_language=en&language=en-US&page=${page}&api_key=${import.meta.env.VITE_TMDB_API_KEY}`
+                );
                 setMovies(responseMovies.data.results);
                 setFetchingMovies(false);
             } catch (error) {
@@ -50,29 +55,37 @@ function FeatureSection() {
                 setFetchingMovies(false);
             }
         })();
-    }, [])
+    }, []);
 
     function renderMoviePosters(movieSlot) {
         const movie = movies[movieSlot];
-        if (!movie) { //checks if movie is null or undefined
+        if (!movie) {
+            // checks if movie is null or undefined
             return null;
-
         }
 
         postersRendered++;
         return (
             <div key={movie.id} id="inFeature" className="moviePoster">
-                <div id="inFeature" className="posterContainer" onClick={() => navigate(`/movies/${movie.id}`)}>
+                <div
+                    id="inFeature"
+                    className="posterContainer"
+                    onClick={() => navigate(`/movies/${movie.id}`)}
+                >
                     <img
-                        src={movie.poster_path ?
-                            `https://image.tmdb.org/t/p/w400${movie.poster_path}`
-                            : `https://placehold.co/400x600?text=Movie+Poster+Unavailable+for+${movie.title}`}
+                        src={
+                            movie.poster_path
+                                ? `https://image.tmdb.org/t/p/w400${movie.poster_path}`
+                                : `https://placehold.co/400x600?text=Movie+Poster+Unavailable+for+${movie.title}`
+                        }
                         alt={movie.title}
                     />
                 </div>
-                <h1 id="inFeature" className="title">{movie.title}</h1>
+                <h1 id="inFeature" className="title">
+                    {movie.title}
+                </h1>
             </div>
-        )
+        );
     }
 
     let postersRendered = 0;
@@ -80,7 +93,9 @@ function FeatureSection() {
         <div id="inFeature" className="featureSection">
             <h1 id="inFeature" className="sectionTitle">Currently Playing</h1>
             <div id="inFeature" className="movieContainer">
-                {fetchingMovies ? <p>Loading...</p> : ( //multiple checks for if the movies array is filled, BUG: only 2 posters will load reason unknown
+                {fetchingMovies ? (
+                    <p>Loading...</p>
+                ) : (
                     <>
                         {movies.length > 19 && renderMoviePosters(movie1)}
                         {movies.length > 19 && renderMoviePosters(movie2)}
@@ -90,7 +105,7 @@ function FeatureSection() {
                 )}
             </div>
         </div>
-    )
+    );
 }
 
-export default FeatureSection
+export default FeatureSection;

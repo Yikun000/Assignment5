@@ -1,60 +1,74 @@
-import { useState } from 'react'
-import HeaderSection from '../Components/HeaderSection.jsx'
-import FooterSection from '../Components/FooterSection.jsx'
-import GenresList from "../Components/Genres.jsx"
-import GenreView from './GenreView.jsx'
-import DetailView from './DetailView.jsx'
-import "./MoviesView.css"
+import { useState } from 'react';
+import HeaderSection from '../Components/HeaderSection.jsx';
+import FooterSection from '../Components/FooterSection.jsx';
+import GenresList from "../Components/Genres.jsx";
+import GenreView from './GenreView.jsx';
+import DetailView from './DetailView.jsx';
+import "./MoviesView.css";
 
 function MoviesView() {
-   const listOfGenres = [
-      { "genreName": "Action", "id": 28 },
-      { "genreName": "Adventure", "id": 12 },
-      { "genreName": "Animation", "id": 16 },
-      { "genreName": "Fantasy", "id": 14 },
-      { "genreName": "Science Fiction", "id": 878 },
-      { "genreName": "War", "id": 10752 },
-      { "genreName": "Comedy", "id": 35 },
-      { "genreName": "Mystery", "id": 9648 },
-      { "genreName": "Western", "id": 37 },
-      { "genreName": "Family", "id": 10751 },
-   ];
-   const [genreSelected, setGenreSelected] = useState(28); 
-   const [movieIdClicked, setMovieIdClicked] = useState(912649); 
-   const [detailViewDisplayed, setdetailViewDisplayed] = useState(false);
-   const [clickedFromFeature, setClickedFromFeature] = useState(false);
+    const listOfGenres = [
+        { genreName: "Action", id: 28 },
+        { genreName: "Adventure", id: 12 },
+        { genreName: "Animation", id: 16 },
+        { genreName: "Fantasy", id: 14 },
+        { genreName: "Science Fiction", id: 878 },
+        { genreName: "War", id: 10752 },
+        { genreName: "Comedy", id: 35 },
+        { genreName: "Mystery", id: 9648 },
+        { genreName: "Western", id: 37 },
+        { genreName: "Family", id: 10751 },
+    ];
 
-   function setGenreId(genre) {
-      setGenreSelected(genre);
-      setdetailViewDisplayed(false)
-   }
+    const [genreSelected, setGenreSelected] = useState(28);
+    const [movieIdClicked, setMovieIdClicked] = useState(912649);
+    const [detailViewDisplayed, setDetailViewDisplayed] = useState(false);
+    const [clickedFromFeature, setClickedFromFeature] = useState(false);
 
-   function setMovieIdValue(movie) {
-      setMovieIdClicked(movie)
-      setClickedFromFeature(false)
-      setdetailViewDisplayed(true)
-   }
+    function setGenreId(genre) {
+        setGenreSelected(genre);
+        setDetailViewDisplayed(false);
+    }
 
-   function returnToGenreView() {
-      setdetailViewDisplayed(false)
-   }
+    function setMovieIdValue(movieId) {
+        setMovieIdClicked(movieId);
+        setClickedFromFeature(false);
+        setDetailViewDisplayed(true);
+    }
 
-   return (
-      <div>
-         <HeaderSection />
-         <div className='genre-section'>
-            <div className='genre-list' >
-               <GenresList selectGenreId={setGenreId} genresList={listOfGenres} genreSelected={genreSelected} />
+    function returnToGenreView() {
+        setDetailViewDisplayed(false);
+    }
+
+    return (
+        <div>
+            <HeaderSection />
+            <div className="genre-section">
+                <div className="genre-list">
+                    <GenresList 
+                        selectGenreId={setGenreId} 
+                        genresList={listOfGenres} 
+                        genreSelected={genreSelected} 
+                    />
+                </div>
+                <div className="genre-view">
+                    {detailViewDisplayed ? (
+                        <DetailView 
+                            movieId={movieIdClicked} 
+                            backToGenre={returnToGenreView} 
+                            clickedFromFeature={clickedFromFeature} 
+                        />
+                    ) : (
+                        <GenreView 
+                            genreId={genreSelected} 
+                            enterDetailView={setMovieIdValue} 
+                        />
+                    )}
+                </div>
             </div>
-            <div className='genre-view' >
-               {detailViewDisplayed ?
-                  <DetailView movieId={movieIdClicked} backToGenre={returnToGenreView} clickedFromFeature={clickedFromFeature} />
-                  : <GenreView genreId={genreSelected} enterDetailView={setMovieIdValue} />}
-            </div>
-         </div>
-         <FooterSection />
-      </div>
-   )
+            <FooterSection />
+        </div>
+    );
 }
 
-export default MoviesView
+export default MoviesView;
