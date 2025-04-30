@@ -1,23 +1,30 @@
-import "./FooterSection.css";
+import { Link } from "react-router-dom";
+import "./FooterSection.css"; 
 
 function FooterSection() {
-
     return (
-        <div className="footerSec">
-            <div className="infoBox">
-                <h1 className="inFooter">Github</h1>
-                <a className="inFooter" href="https://github.com/Yikun000">My Github</a>
-                <a className="inFooter" href="https://github.com/Yikun000/Assignment5">Website repository</a>
+        <footer className="footerSection">
+            <div className="footerContent">
+                <div className="footerLogo">
+                    <h2>🎬 Info Box</h2>
+                    <a href="https://github.com/Yikun000" target="_blank" rel="noreferrer">My Github</a>
+                </div>
+
+                <div className="footerSocials">
+                    <h3>Follow Us</h3>
+                    <div className="socialIcons">
+                        <a href="https://twitter.com" target="_blank" rel="noreferrer">🐦</a>
+                        <a href="https://instagram.com" target="_blank" rel="noreferrer">📸</a>
+                        <a href="https://facebook.com" target="_blank" rel="noreferrer">📘</a>
+                    </div>
+                </div>
             </div>
-            <div className="infoBox">
-                <h1 className="inFooter" >Socials</h1>
-                <a href="#" aria-label="Facebook">🔵</a>
-                <a href="#" aria-label="Twitter">🐦</a>
-                <a href="#" aria-label="Instagram">📸</a>
-                <a href="#" aria-label="LinkedIn">🔗</a>
+
+            <div className="footerBottom">
+                <p>&copy; {new Date().getFullYear()} Wooflix. All rights reserved.</p>
             </div>
-        </div>
-    )
+        </footer>
+    );
 }
 
 export default FooterSection

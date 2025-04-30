@@ -22,7 +22,7 @@ function RegisterView() {
             <HeaderSection />
             <div className="formContainerReg">
                 <h1 className="formTitleReg">Register</h1>
-                <form className="formReg" onSubmit={() => rePasswordCheck()?alert('Unavailable'):alert('Passwords are not the same')} >
+                <form className="formReg" onSubmit={() => rePasswordCheck()?alert('Password Match'):alert('Passwords are not the same')} >
                     <label className="boxLabelsReg" >First Name:</label>
                     <input required className="infoBoxesReg" type="text" value={firstName} onChange={(event) => { setFirstName(String(event.target.value)) }} />
                     <label className="boxLabelsReg" >Last Name:</label>
