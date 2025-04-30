@@ -39,10 +39,10 @@ function FeatureSection() {
     useEffect(() => { 
         (async function getMovies() {
             try {
-                const responsePages = await axios.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=${import.meta.env.TMDB_API_KEY}`);
+                const responsePages = await axios.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=${import.meta.env.VITE_TMDB_API_KEY}`);
                 const page = Math.floor(Math.random() * responsePages.data.total_pages / 4) + 1;
 
-                const responseMovies = await axios.get(`https://api.themoviedb.org/3/movie/now_playing?include_adult=false&with_original_language=en&language=en-US&page=${page}&api_key=${import.meta.env.TMDB_API_KEY}`);
+                const responseMovies = await axios.get(`https://api.themoviedb.org/3/movie/now_playing?include_adult=false&with_original_language=en&language=en-US&page=${page}&api_key=${import.meta.env.VITE_TMDB_API_KEY}`);
                 setMovies(responseMovies.data.results);
                 setFetchingMovies(false);
             } catch (error) {
@@ -61,8 +61,8 @@ function FeatureSection() {
 
         postersRendered++;
         return (
-            <div key={movie.id} id="inFeature" classNameName="moviePoster">
-                <div id="inFeature" classNameName="posterContainer" onClick={() => navigate(`/movies/${movie.id}`)}>
+            <div key={movie.id} id="inFeature" className="moviePoster">
+                <div id="inFeature" className="posterContainer" onClick={() => navigate(`/movies/${movie.id}`)}>
                     <img
                         src={movie.poster_path ?
                             `https://image.tmdb.org/t/p/w400${movie.poster_path}`
@@ -70,16 +70,16 @@ function FeatureSection() {
                         alt={movie.title}
                     />
                 </div>
-                <h1 id="inFeature" classNameName="title">{movie.title}</h1>
+                <h1 id="inFeature" className="title">{movie.title}</h1>
             </div>
         )
     }
 
     let postersRendered = 0;
     return (
-        <div id="inFeature" classNameName="featureSection">
-            <h1 id="inFeature" classNameName="sectionTitle">Currently Playing</h1>
-            <div id="inFeature" classNameName="movieContainer">
+        <div id="inFeature" className="featureSection">
+            <h1 id="inFeature" className="sectionTitle">Currently Playing</h1>
+            <div id="inFeature" className="movieContainer">
                 {fetchingMovies ? <p>Loading...</p> : ( //multiple checks for if the movies array is filled, BUG: only 2 posters will load reason unknown
                     <>
                         {movies.length > 19 && renderMoviePosters(movie1)}
