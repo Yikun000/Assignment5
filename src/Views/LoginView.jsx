@@ -22,15 +22,15 @@ function LoginView() {
     return (
         <div>
             <HeaderSection />
-            <div className="formContainerLog">
-                <h1 className="formTitleLog" >Login</h1>
-                <form className="formLog" onSubmit={() => loginInfoCheck() ? navigate('/movies') : alert('Password is incorrect')}>
-                    <label className="boxLabelsLog">Email:</label>
-                    <input required className="infoBoxesLog" type="text" value={email} onChange={(event) => { setEmail(String(event.target.value)) }} />
-                    <label className="boxLabelsLog">Password:</label>
-                    <input required className="infoBoxesLog" type="password" value={password} onChange={(event) => { setPassword(String(event.target.value)) }} />
+            <div classNameName="formContainerLog">
+                <h1 classNameName="formTitleLog" >Login</h1>
+                <form classNameName="formLog" onSubmit={() => loginInfoCheck() ? navigate('/movies') : alert('Password is incorrect')}>
+                    <label classNameName="boxLabelsLog">Email:</label>
+                    <input required classNameName="infoBoxesLog" type="text" value={email} onChange={(event) => { setEmail(String(event.target.value)) }} />
+                    <label classNameName="boxLabelsLog">Password:</label>
+                    <input required classNameName="infoBoxesLog" type="password" value={password} onChange={(event) => { setPassword(String(event.target.value)) }} />
 
-                    <input className="loginButtonLog" type="submit" value={"Login"} />
+                    <input classNameName="loginButtonLog" type="submit" value={"Login"} />
                 </form>
             </div>
         </div>

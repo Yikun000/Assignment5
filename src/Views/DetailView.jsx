@@ -30,18 +30,18 @@ function DetailView({ movieId: propMovieId, backToGenre, clickedFromFeature }) {
     }, [movieId]);
 
     return (
-        <div className="movieDetails">
+        <div classNameName="movieDetails">
             {isLoading ? (
                 <div>Loading...</div> //Shows a loading message
             ) : (
                 <>
-                    <img id="inDetail" className="moviePoster"
+                    <img id="inDetail" classNameName="moviePoster"
                         src={movie.poster_path ?
                             `https://image.tmdb.org/t/p/w400${movie.poster_path}` :
                             `https://placehold.co/400x600?text=Movie+Poster+Unavailable+for+${movie.original_title}`}
                         alt={movie.original_title}
                     />
-                    <div className="movieInfo">
+                    <div classNameName="movieInfo">
                         <h1 id="textInDetail" >{movie.original_title}</h1>
                         {movie.original_language == "en" ? null : <h1 id="textInDetail" >Translated Title: {movie.title}</h1>}
                         <p id="textInDetail" >Description:<br />{movie.overview}</p>
@@ -50,25 +50,25 @@ function DetailView({ movieId: propMovieId, backToGenre, clickedFromFeature }) {
                         <h3 id="textInDetail" >Budget: {movie.budget == 0 ? "N/A" : "$" + (movie.budget) / 1000000 + " Million"}</h3>
                     </div>
 
-                    <div className="productionCompanies">
+                    <div classNameName="productionCompanies">
                         <h1 id="textInDetail">Production Companies</h1>
-                        <ul className="companiesList">
+                        <ul classNameName="companiesList">
                             {movie.production_companies.map((company) => (
                                 <li id="textInDetail" key={company.id}>{company.name}</li>
                             ))}
                         </ul>
                     </div>
 
-                    <h1 id="textInDetail" className="trailerTitle">Teaser Trailers:</h1>
-                    <div className="teaserTrailers">
+                    <h1 id="textInDetail" classNameName="trailerTitle">Teaser Trailers:</h1>
+                    <div classNameName="teaserTrailers">
                         {movie.videos && movie.videos.results.map((trailer) => (
                             trailer.type == "Teaser" || trailer.type == "Trailer" || trailer.type == "Clip" ? (
-                                <div key={trailer.id} className="trailerTile">
+                                <div key={trailer.id} classNameName="trailerTile">
                                     <a href={`https://www.youtube.com/watch?v=${trailer.key}`} target="_blank" rel="noopener noreferrer">
-                                        <img className="trailerThumbnail"
+                                        <img classNameName="trailerThumbnail"
                                             src={`https://img.youtube.com/vi/${trailer.key}/0.jpg`}
                                             alt={trailer.name} />
-                                        <h3 className="trailerName">{trailer.name}</h3>
+                                        <h3 classNameName="trailerName">{trailer.name}</h3>
                                     </a>
                                 </div>
                             ) : null
@@ -77,8 +77,8 @@ function DetailView({ movieId: propMovieId, backToGenre, clickedFromFeature }) {
                 </>
             )}
             {featureClicked ?
-                <button className="backButton" onClick={() => navigate(-1)}>Back</button>
-                : <button className="backButton" onClick={() => backToGenre()}>Back</button>}
+                <button classNameName="backButton" onClick={() => navigate(-1)}>Back</button>
+                : <button classNameName="backButton" onClick={() => backToGenre()}>Back</button>}
         </div>
     );
 }

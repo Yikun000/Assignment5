@@ -5,9 +5,9 @@ function HeroSection() {
     const navigate = useNavigate();
 
     return (
-        <div className="heroSection" >
-            <h1 className="inHero">Start Renting Movies Now</h1>
-            <button className="inHero" onClick={() => navigate('/register')}>Sign Up</button>
+        <div classNameName="heroSection" >
+            <h1 classNameName="inHero">Rent Movies Now!</h1>
+            <button classNameName="inHero" onClick={() => navigate('/register')}>Sign Up</button>
         </div>
     )
 }

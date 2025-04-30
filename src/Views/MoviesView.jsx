@@ -42,11 +42,11 @@ function MoviesView() {
    return (
       <div>
          <HeaderSection />
-         <div className='genre-section'>
-            <div className='genre-list' >
+         <div classNameName='genre-section'>
+            <div classNameName='genre-list' >
                <GenresList selectGenreId={setGenreId} genresList={listOfGenres} genreSelected={genreSelected} />
             </div>
-            <div className='genre-view' >
+            <div classNameName='genre-view' >
                {detailViewDisplayed ?
                   <DetailView movieId={movieIdClicked} backToGenre={returnToGenreView} clickedFromFeature={clickedFromFeature} />
                   : <GenreView genreId={genreSelected} enterDetailView={setMovieIdValue} />}
