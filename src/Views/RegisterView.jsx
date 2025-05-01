@@ -10,10 +10,10 @@ function RegisterView() {
     const [rePassword, setRePassword] = useState("");
 
     function handleSubmit(event) {
-        event.preventDefault(); // prevent form from refreshing the page
+        event.preventDefault(); 
         if (password === rePassword) {
             alert("Password Match");
-            // Additional logic like saving user info or navigating can go here
+         
         } else {
             alert("Passwords are not the same");
         }

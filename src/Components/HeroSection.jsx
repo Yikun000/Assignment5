@@ -6,7 +6,7 @@ function HeroSection() {
 
     return (
         <div className="heroSection">
-            <h1 className="inHero">Rent Movies Now!</h1>
+            <h1 className="inHero">Sign Up On the Latest Movies!</h1>
             <button className="inHero" onClick={() => navigate('/register')}>
                 Sign Up
             </button>

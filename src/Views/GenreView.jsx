@@ -9,7 +9,7 @@ function GenreView({ genreId, enterDetailView }) {
     const [page, setPage] = useState(1);
 
     useEffect(() => {
-        setPage(1); // Reset to page 1 whenever the genre changes
+        setPage(1); 
     }, [genreId]);
 
     useEffect(() => {

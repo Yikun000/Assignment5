@@ -9,11 +9,11 @@ function FeatureSection() {
     const [movie2, setMovie2] = useState(1);
     const [movie3, setMovie3] = useState(2);
     const [movie4, setMovie4] = useState(3);
-    const [fetchingMovies, setFetchingMovies] = useState(true); // true means it's still fetching the movies from the api
+    const [fetchingMovies, setFetchingMovies] = useState(true); 
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Selects 3 random different movies
+        
         (function randMovies() {
             let m1 = Math.floor(Math.random() * 20) + 1;
             let m2, m3, m4;
@@ -41,7 +41,7 @@ function FeatureSection() {
         (async function getMovies() {
             try {
                 const responsePages = await axios.get(
-                    `https://api.themoviedb.org/3/movie/now_playing?api_key=${import.meta.env.VITE_TMDB_API_KEY}`
+                    `https://api.themoviedb.org/3/movie/now_playing?include_adult=false&with_original_language=en&language=en-US&api_key=${import.meta.env.VITE_TMDB_API_KEY}`
                 );
                 const page = Math.floor(Math.random() * responsePages.data.total_pages / 4) + 1;
 
@@ -60,7 +60,6 @@ function FeatureSection() {
     function renderMoviePosters(movieSlot) {
         const movie = movies[movieSlot];
         if (!movie) {
-            // checks if movie is null or undefined
             return null;
         }
 
