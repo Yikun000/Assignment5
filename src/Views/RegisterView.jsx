@@ -1,80 +1,104 @@
-import "./RegisterView.css";
 import { useState } from "react";
-import HeaderSection from "../Components/HeaderSection";
+import { useNavigate } from "react-router-dom";
+import "./RegisterView.css";
+import Header from "../Components/Header";
 
-function RegisterView() {
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [rePassword, setRePassword] = useState("");
+export default function RegisterView() {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const [error, setError] = useState("");
 
-    function handleSubmit(event) {
-        event.preventDefault(); 
-        if (password === rePassword) {
-            alert("Password Match");
-         
-        } else {
-            alert("Passwords are not the same");
-        }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      setError("Passwords do not match");
+      return;
     }
+    setError("");
+    console.log("Form submitted:", formData);
+    navigate("/movies");
+  };
 
-    return (
-        <div>
-            <HeaderSection />
-            <div className="formContainerReg">
-                <h1 className="formTitleReg">Register</h1>
-                <form className="formReg" onSubmit={handleSubmit}>
-                    <label className="boxLabelsReg">First Name:</label>
-                    <input
-                        required
-                        className="infoBoxesReg"
-                        type="text"
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                    />
-
-                    <label className="boxLabelsReg">Last Name:</label>
-                    <input
-                        required
-                        className="infoBoxesReg"
-                        type="text"
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
-                    />
-
-                    <label className="boxLabelsReg">Email:</label>
-                    <input
-                        required
-                        className="infoBoxesReg"
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-
-                    <label className="boxLabelsReg">Password:</label>
-                    <input
-                        required
-                        className="infoBoxesReg"
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-
-                    <label className="boxLabelsReg">Re-enter Password:</label>
-                    <input
-                        required
-                        className="infoBoxesReg"
-                        type="password"
-                        value={rePassword}
-                        onChange={(e) => setRePassword(e.target.value)}
-                    />
-
-                    <input className="registerButtonReg" type="submit" value="Register" />
-                </form>
+  return (
+    <>
+      <Header />
+      <div className="register-container">
+        <div className="register-form">
+          <h2 className="register-title">Register</h2>
+          <form onSubmit={handleSubmit} className="form">
+            <div className="form-group">
+              <label className="form-label">First Name</label>
+              <input
+                type="text"
+                name="firstName"
+                className="form-input"
+                value={formData.firstName}
+                onChange={handleChange}
+                required
+              />
             </div>
+            <div className="form-group">
+              <label className="form-label">Last Name</label>
+              <input
+                type="text"
+                name="lastName"
+                className="form-input"
+                value={formData.lastName}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label className="form-label">Email</label>
+              <input
+                type="email"
+                name="email"
+                className="form-input"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label className="form-label">Password</label>
+              <input
+                type="password"
+                name="password"
+                className="form-input"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label className="form-label">Confirm Password</label>
+              <input
+                type="password"
+                name="confirmPassword"
+                className="form-input"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            {error && <p className="error-message">{error}</p>}
+            <button type="submit" className="submit-btn">
+              Register
+            </button>
+          </form>
         </div>
-    );
+      </div>
+  </>
+        );
 }
-
-export default RegisterView;

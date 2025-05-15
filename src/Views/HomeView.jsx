@@ -1,17 +1,18 @@
-import HeaderSection from '../Components/HeaderSection.jsx';
-import HeroSection from '../Components/HeroSection.jsx';
-import FeatureSection from '../Components/FeatureSection.jsx';
-import FooterSection from '../Components/FooterSection.jsx';
+import "./HomeView.css";
+import Header from "../Components/Header";
+import Hero from "../Components/Hero";
+import Feature from "../Components/Feature";
+import Footer from "../Components/Footer";
 
 function HomeView() {
-    return (
-        <div>
-            <HeaderSection />
-            <HeroSection />
-            <FeatureSection />
-            <FooterSection />
-        </div>
-    );
+  return (
+    <>
+      <Header />
+      <Hero/>
+      <Feature/>
+      <Footer />
+    </>
+  );
 }
 
 export default HomeView;

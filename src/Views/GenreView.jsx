@@ -1,108 +1,67 @@
-import "./GenreView.css";
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
+import "./GenreView.css";
 
-function GenreView({ genreId, enterDetailView }) {
-    const [fetchingMovies, setFetchingMovies] = useState(true);
+function GenreView() {
+    const { genre_id } = useParams();
     const [movies, setMovies] = useState([]);
-    const [maxPages, setMaxPages] = useState(1);
     const [page, setPage] = useState(1);
 
-    useEffect(() => {
-        setPage(1); 
-    }, [genreId]);
 
     useEffect(() => {
-        (async function getMovies() {
+        const fetchMovies = async () => {
             try {
                 const response = await axios.get(
-                    `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc&with_genres=${genreId}&api_key=${import.meta.env.VITE_TMDB_API_KEY}`
+                    `https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_TMDB_KEY}&with_genres=${genre_id}&page=${page}&include_adult=false`
                 );
                 setMovies(response.data.results);
-                setMaxPages(response.data.total_pages);
             } catch (error) {
-                console.error("ERROR in fetching movies", error);
-            } finally {
-                setFetchingMovies(false);
+                console.error("Error fetching movies:", error);
             }
-        })();
-    }, [genreId, page]);
+        };
+        fetchMovies();
+    }, [genre_id, page]);
 
-    function renderMoviePosters() {
-        if (movies.length <= 19) {
-            return null;
-        }
+    const handleNextPage = () => {
+        setPage((prevPage) => prevPage + 1);
+    };
 
+    const handlePreviousPage = () => {
+        if (page > 1) setPage((prevPage) => prevPage - 1);
+    };
+
+    if (!movies.length) {
         return (
-            <>
-                <div id="inGenre" className="moviesContainer">
-                    {movies.map((movie) => (
-                        <div key={movie.id} id="inGenre" className="moviePoster">
-                            <div
-                                id="inGenre"
-                                className="posterContainer"
-                                onClick={() => enterDetailView(movie.id)}
-                            >
-                                <img
-                                    src={
-                                        movie.poster_path
-                                            ? `https://image.tmdb.org/t/p/w400${movie.poster_path}`
-                                            : `https://placehold.co/300x450?text=Movie+Poster+Unavailable`
-                                    }
-                                    alt={movie.title}
-                                />
-                            </div>
-                            <h1 id="inGenre" className="movieTitle">{movie.title}</h1>
-                        </div>
-                    ))}
-                </div>
-
-                <div className="pageSelector">
-                    <button
-                        className="prevButton"
-                        onClick={() =>
-                            page > 1
-                                ? setPage(page - 1)
-                                : alert('You are on the first page, there is no previous page.')
-                        }
-                    >
-                        Previous
-                    </button>
-
-                    <input
-                        className="pageNumberBox"
-                        type="number"
-                        min={1}
-                        max={maxPages}
-                        value={page}
-                        onChange={(event) => {
-                            const newPage = Number(event.target.value);
-                            if (newPage >= 1 && newPage <= maxPages) {
-                                setPage(newPage);
-                            } else {
-                                alert('Page does not exist');
-                            }
-                        }}
-                    />
-
-                    <button
-                        className="nextButton"
-                        onClick={() =>
-                            page < maxPages
-                                ? setPage(page + 1)
-                                : alert('You are on the last page, there is no next page.')
-                        }
-                    >
-                        Next
-                    </button>
-                </div>
-            </>
+            <div className="genre-view-container">
+                <h1 className="genre-title">Movies</h1>
+                <p>No movies available for this genre.</p>
+            </div>
         );
     }
 
     return (
-        <div>
-            {fetchingMovies ? <p>Loading...</p> : renderMoviePosters()}
+        <div className="genre-view-container">
+            <h1 className="genre-title">Movies</h1>
+            <div className="movies-grid">
+                {movies.map((movie) => (
+                    <Link to={`/movies/details/${movie.id}`} key={movie.id} className="movie-card-link">
+                        <div className="movie-card">
+                            <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} className="movie-poster"/>
+                            <h3 className="movie-title">{movie.title}</h3>
+                        </div>
+                    </Link>
+                ))}
+            </div>
+            <div className="pagination-controls">
+                <button onClick={handlePreviousPage} disabled={page === 1}>
+                    Previous
+                </button>
+                <span>Page {page}</span>
+                <button onClick={handleNextPage}>
+                    Next
+                </button>
+            </div>
         </div>
     );
 }

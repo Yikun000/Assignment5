@@ -1,72 +1,85 @@
-#inGenre.moviesContainer {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(7, auto);
-    gap: 40px;
-    padding: 20px;
-    width: auto;
+.genre-view-container {
+  padding: 40px 20px;
+  background: linear-gradient(to bottom, #e1f5fe, #b3e5fc);
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  text-align: center;
 }
 
-#inGenre.moviePoster {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: auto;
+.genre-title {
+  font-size: 2.5rem;
+  color: #0277bd; 
+  margin-bottom: 30px;
 }
 
-#inGenre.posterContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-    z-index: 10;
-    pointer-events: auto;
+.movies-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
 }
 
-#inGenre.posterContainer img {
-    border: solid;
-    border-color: goldenrod;
-    border-width: 5px;
-    border-radius: 25px;
-    width: 100%;
-    height: auto;
+.movie-card-link {
+  text-decoration: none;
 }
 
-#inGenre.movieTitle {
-    text-align: center;
-    font-size: 30px;
-    color: lightblue;
-    padding: 10px;
+.movie-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  width: 180px;
+  padding: 10px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
 }
 
-.pageSelector {
-    display: flex;
-    justify-content: space-around;
+.movie-card:hover {
+  transform: scale(1.05);
 }
 
-.prevButton {
-    border-radius: 10px;
-    height: 60px;
-    width: 110px;
-    background-color: lightblue;
-    color: white;
-    font-size: large;
+.movie-poster {
+  width: 100%;
+  border-radius: 12px;
 }
 
-.nextButton {
-    border-radius: 10px;
-    height: 60px;
-    width: 110px;
-    background-color: lightblue;
-    color: white;
-    font-size: large;
+.movie-title {
+  margin-top: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #d32f2f; 
 }
 
-.pageNumberBox {
-    border-radius: 10px;
-    height: 40px;
-    width: 100px;
+.pagination-controls {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.pagination-controls button {
+  background-color: #ffca28; 
+  color: #01579b;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.pagination-controls button:hover:not(:disabled) {
+  background-color: #ffd54f;
+  transform: translateY(-2px);
+}
+
+.pagination-controls button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination-controls span {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #0277bd;
 }
